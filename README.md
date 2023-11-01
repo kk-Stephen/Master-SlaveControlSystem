@@ -6,7 +6,7 @@ Topic: Master-Slave Control System Based on Ant Queue Behavior for Confined Spac
 Task Domain / Context
 We will employ three 3Pi+ robots to create a master-slave control system inspired by ant queue behavior. The leader will utilize line-following sensors and collision sensors for obstacle avoidance, while the followers will use collision sensors to follow the leader. We aim to explore the feasibility of the leader performing line-following and obstacle avoidance tasks in confined spaces. Additionally, we will investigate the impact of using different controllers for the leader and followers within this master-slave system.
 
-#Hypothesis
+# Hypothesis
 We expect to explore the feasibility of the leader performing line-following and obstacle avoidance in confined spaces using line-following and collision sensors. Simultaneously, we aim to assess the influence of applying different controllers to the followers in my master-slave system. We will implement Model Predictive Control (MPC) along with collision sensors to achieve master-slave control for the three robots (one leader and two followers). We anticipate enhancing the robots' performance in following a specified path and will compare the differences in effectiveness between MPC, PID, and BANG BANG controllers.
 
 # Data & Results
