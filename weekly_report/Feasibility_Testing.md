@@ -60,7 +60,7 @@ Methods: Rotate the reflective plane counterclockwise from 0 to 90 degrees and r
 
 Result: From 0 to 70 degrees, the sensor's difference is linearly related to the magnitude of the angle of rotation of the reflective plane.
 
-![image-20231107205306981](C:\Users\15972\AppData\Roaming\Typora\typora-user-images\image-20231107205306981.png)
+![angle_sensor](D:\Github\Master-SlaveControlSystem\images\angle_sensor.jpg)
 
 ## Recognizability of turnaround signals from leaders
 
@@ -70,4 +70,4 @@ Methods: Rotate the leader robot and record the sensors values of follower.
 
 Result: When the follower receives infrared light emitted by the leader, the value of its sensors are much lower.
 
-<img src="C:\Users\15972\AppData\Roaming\Typora\typora-user-images\image-20231107212836803.png" alt="image-20231107212836803" style="zoom:50%;" />
+<img src="D:\Github\Master-SlaveControlSystem\images\feedback_sig.jpg" alt="feedback_sig" style="zoom:50%;" />
