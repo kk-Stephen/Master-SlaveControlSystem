@@ -50,7 +50,7 @@ $$ e = f (v_l, v_r, e')$$
 
 
 
-### Challenge: How to generate the function $f$ ?
+### Challenge: How to generate the function $`f`$ ?
 
 Propose methods:
 
