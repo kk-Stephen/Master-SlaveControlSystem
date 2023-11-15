@@ -50,6 +50,10 @@
 |                |         |         |       |
 |                |         |         |       |
 
+data from robot and build a model to generate best papemrters
+
+linear regression to adjust PID
+
 # Feasibility Testing
 
 ## Relationship between the angle of the reflection plane and the difference of bumper sensors
