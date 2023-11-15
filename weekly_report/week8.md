@@ -63,14 +63,11 @@ Purpose: Make the cart reach the target point smoothly.
 
 Methods: Determine the cost from smoothness and the cost from the target point.
 
-
-$`{\sum_{n=1}^{10}}  n^2`$
-
-
+$$\sum_{n=1}^{10} n^2$$
 
 $$ Cost = \sum\limits_{i = 0 }^{p}w*_ee_*{k+1}^2 + \sum\limits_{i = 0}^{p - 1}w*_u \Delta u_*{k+1}^{2} $$
 
-$$ Cost = \sum_{i = 0 }^{p}w*_ee_*{k+1}^2$$
+
 
 where $$\Delta u = \left|v_l - v_r\right| - c$$
 
