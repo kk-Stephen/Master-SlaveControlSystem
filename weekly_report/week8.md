@@ -64,7 +64,7 @@ Purpose: Make the cart reach the target point smoothly.
 Methods: Determine the cost from smoothness and the cost from the target point.
 
 
-$$ Cost = \sum\limits_{i = 0 }^{p} w_e e_{k+1}^2 + \sum\limits_{i = 0}^{p - 1}w_u \Delta u_{k+1}^{2} $$
+$$ Cost = \sum\limits_{i = 0 }^{p} w_e e_{k+i}^2 + \sum\limits_{i = 0}^{p - 1}w_u \Delta u_{k+i}^{2} $$
 
 
 
