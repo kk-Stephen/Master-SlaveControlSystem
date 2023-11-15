@@ -64,7 +64,7 @@ Purpose: Make the cart reach the target point smoothly.
 Methods: Determine the cost from smoothness and the cost from the target point.
 
 
-$\sum_{n=1}^{10} n^2$
+$`{\sum_{n=1}^{10}}  n^2`$
 
 
 
