@@ -28,7 +28,7 @@ Velocity of left and right wheel.
 
 
 
-$v_l$ & $v_r$
+$$v_l$ & $v_r$$
 
 ## Mathematical model
 
@@ -36,7 +36,7 @@ Purpose: Relate the state variables and the control inputs for future prediction
 
 
 
-$ {\Delta}e = f (v_l, v_r)$ / $ e = f (v_l, v_r, e')$
+$$ {\Delta}e = f (v_l, v_r)$ / $ e = f (v_l, v_r, e')$$
 
 
 
@@ -53,9 +53,9 @@ Purpose: Make the cart reach the target point smoothly.
 
 Methods: Determine the cost from smoothness and the cost from the target point.
 
-$\sum\limits_{i = 0 }^{p}w*_ee_*{k+1}^2 + \sum\limits_{i = 0}^{p - 1}w*_u \Delta u_*{k+1}^{2} $
+$$\sum\limits_{i = 0 }^{p}w*_ee_*{k+1}^2 + \sum\limits_{i = 0}^{p - 1}w*_u \Delta u_*{k+1}^{2} $$
 
-where $\Delta u = \left|v_l - v_r\right| - c$
+where $$\Delta u = \left|v_l - v_r\right| - c$$
 
 ## Optimization
 
