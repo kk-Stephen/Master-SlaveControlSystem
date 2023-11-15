@@ -28,7 +28,7 @@ Velocity of left and right wheel.
 
 
 
-$$v_l$ & $v_r$$
+$$v_l$$ & $$v_r$$
 
 ## Mathematical model
 
@@ -36,7 +36,7 @@ Purpose: Relate the state variables and the control inputs for future prediction
 
 
 
-$$ {\Delta}e = f (v_l, v_r)$ / $ e = f (v_l, v_r, e')$$
+$$ {\Delta}e = f (v_l, v_r)$$ / $$ e = f (v_l, v_r, e')$$
 
 
 
