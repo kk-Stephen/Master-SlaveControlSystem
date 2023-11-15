@@ -20,7 +20,7 @@ Methods: Map the sensor values to the position of the car relative to the line.
 
 
 
-$ e = {{2 ( R - L)} \over { R + L }} $
+$$e = {{2 ( R - L)} \over { R + L }} $$
 
 ## Control inputs
 
