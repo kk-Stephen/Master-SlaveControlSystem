@@ -28,7 +28,7 @@ Velocity of left and right wheel.
 
 
 
-$$v_l$$ & $$v_r$$
+$$v_l  & v_r$$
 
 ## Mathematical model
 
