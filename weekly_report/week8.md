@@ -65,7 +65,7 @@ Methods: Determine the cost from smoothness and the cost from the target point.
 
 
 
-$$\sum\limits_{i = 0 }^{p}w*_ee_*{k+1}^2 + \sum\limits_{i = 0}^{p - 1}w*_u \Delta u_*{k+1}^{2} $$
+$$ \sum\limits_{i = 0 }^{p}w*_ee_*{k+1}^2 + \sum\limits_{i = 0}^{p - 1}w*_u \Delta u_*{k+1}^{2} $$
 
 
 
