@@ -47,8 +47,9 @@ or
 
 
 $$ e = f (v_l, v_r, e')$$
+
 $$f(vl,vr,ep) = -0.191 + 1.012vl - 0.888vr + 1.046ep + 2.114vl^2 - 2.632vlvr - 1.643vlep + 0.533vr^2 - 0.119vrep + 0.052ep^2 - 2.021vl^3 + 5.248vl^2vr + 1.923vl^2ep - 4.771vlvr^2 - 3.120vlevr - 0.341vlep^2 + 1.536vr^3 + 1.574vr^2ep + 0.316vrep^2 - 0.341ep^3$$
-</annotation></semantics></math>
+
 
 
 ### Challenge: How to generate the function $`f`$ ?
