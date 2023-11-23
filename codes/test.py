@@ -7,11 +7,6 @@ def f(v_l,v_r,e_p):
 def costf(we, wv, vl, vr, ep):
     cost = we * (pow(ep[1],2) + pow(ep[0], 2)) + wv * pow((vl - vr),2)
     return cost
-e0 = 1.3
-vl1 = 0.9826429931268026
-vr1 = 1.1496637665611829
-e1 = f(vl1, vr1,e0)
-ep = [e0, e1]
 # print(costf(0.8,0.2,vl1,vr1,ep))
 
 def gradient(vl1,vr1,e0):
@@ -31,7 +26,17 @@ def sgd(vl1,vr1,e0, learning_rate=0.01, num_epochs=100):
 
     return vl1,vr1
 
+e0s = []
+vls = []
+vrs = []
 
 # 运行随机梯度下降
-result = sgd(vl1,vr1,e0)
-print(result[0],result[1])
+for e0 in np.arange(-1.0, 1.0, 0.1):
+    e0 = round(e0, 2)
+    e0s.append(e0)
+    vl1 = 0.9826429931268026
+    vr1 = 1.1496637665611829
+    e1 = f(vl1, vr1, e0)
+    ep = [e0, e1]
+    result = sgd(vl1,vr1,e0)
+    print(result[0],result[1])

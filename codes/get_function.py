@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 import math
 
 df = pd.read_csv("D:/Github/Master-SlaveControlSystem/codes/data/e_v_data/e_v_data.csv")
-
+df['ep'] = df['ep']*10
 X = df[['vl', 'vr', 'ep']]
-y = df['e']
+y = df['e']*10
 models = []
 r2s = []
 mses = []
