@@ -3,6 +3,7 @@
 #include "encoders.h"
 #include "kinematics.h"
 #include "pid.h"
+# include <EEPROM.h>
 
 //detect black and white
 #define COLORGAP 1500
@@ -14,11 +15,12 @@
 
 Motors_c motors;
 LineSensor_c line_sensors;
-Kinematics_c kinematics;
+Kinematics_c kine;
 
 bool on_line;                           // on line or not
 unsigned long line_sensor_ts, kine_ts;  // time stamp
 float sens_val[5];                      // line sensors values
+int eeprom_address;
 
 //weighted leader
 void weighted(float left, float right) {
@@ -53,17 +55,29 @@ bool lineDetected() {
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  delay(1000);
+  delay(5000);
   Serial.println("***RESET***");
   // put your setup code here, to run once:
   line_sensor_ts = millis();
   kine_ts = millis();
 
   on_line = false;
+  eeprom_address = 0;
+  for (int i = 0; i < EEPROM.length(); i++) {
+    EEPROM.write(i, 0);
+  }
+  Serial.println("EEPROM cleared!");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  if ( eeprom_address >= 1020) {
+    while (1) {
+      motors.setMotorPower(0.0, 0.0);
+      //      Serial.println(eeprom_address);
+    }
+  }
+
   float elapsed_t;
   unsigned long current_ts;
   current_ts = millis();
@@ -79,7 +93,13 @@ void loop() {
   elapsed_t = current_ts - kine_ts;
   //Update Kine
   if (elapsed_t > KINE_UPDATE) {
-    kinematics.update();
+    kine.Update(count_e1, count_e0);
+    EEPROM.put( eeprom_address, kine.getTheta());
+    eeprom_address += sizeof(float);
+    EEPROM.put( eeprom_address, kine.getX());
+    eeprom_address += sizeof(float);
+    EEPROM.put( eeprom_address, kine.getY());
+    eeprom_address += sizeof(float);
     kine_ts = millis();
   }
 

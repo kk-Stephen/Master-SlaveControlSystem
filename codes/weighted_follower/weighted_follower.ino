@@ -18,6 +18,7 @@ Kinematics_c kinematics;
 bool on_following;                           // on line or not
 unsigned long line_sensor_ts, kine_ts;  // time stamp
 float sens_val[2];                      // line sensors values
+int eeprom_address;
 
 //weighted leader
 void weighted(float left, float right) {
@@ -46,17 +47,25 @@ bool lineDetected() {
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  delay(1000);
+  delay(5000);
   Serial.println("***RESET***");
   // put your setup code here, to run once:
   line_sensor_ts = millis();
   kine_ts = millis();
 
   on_following = true;
+  eeprom_address = 0;
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  if ( eeprom_address >= 1020) {
+    while (1) {
+      motors.setMotorPower(0.0, 0.0);
+      //      Serial.println(eeprom_address);
+    }
+  }
+
   float elapsed_t;
   unsigned long current_ts;
   current_ts = millis();
@@ -73,6 +82,12 @@ void loop() {
   //Update Kine
   if (elapsed_t > KINE_UPDATE) {
     kinematics.update();
+    EEPROM.put( eeprom_address, kine.getTheta());
+    eeprom_address += sizeof(float);
+    EEPROM.put( eeprom_address, kine.getX());
+    eeprom_address += sizeof(float);
+    EEPROM.put( eeprom_address, kine.getY());
+    eeprom_address += sizeof(float);
     kine_ts = millis();
   }
 
