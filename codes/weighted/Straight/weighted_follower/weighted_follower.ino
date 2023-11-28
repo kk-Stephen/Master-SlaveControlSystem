@@ -33,7 +33,7 @@ void weighted(float left, float right) {
   //h_m = N[1]-N[0];
   float w = N[1] - N[0];
   //Serial.println(w);
-  motors.setMotorPower(19 + 10* w, 19 + 10 * w);
+  motors.setMotorPower(20 - 6* w, 20 + 6 * w);
 }
 
 bool lineDetected() {
