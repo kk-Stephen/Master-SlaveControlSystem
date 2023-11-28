@@ -61,7 +61,13 @@ class Kinematics_c {
     
     //get delta theta
     float getTheta(){
-      return( ( ( count_e0 - pri_count_e0) - ( count_e1 - pri_count_e1 ) ) * r  * 360 / ( 2 * crp * l ) );
+      return theta_i;
+    }
+    float getX(){
+      return xi;
+    }
+    float getY(){
+      return yi;
     }
 
 };

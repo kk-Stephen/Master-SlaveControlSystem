@@ -1,25 +1,24 @@
 #include "motors.h"
-#include "linesensor.h"
+#include "bumpsensor.h"
 #include "encoders.h"
 #include "kinematics.h"
-#include "pid.h"
 # include <EEPROM.h>
 
 //detect black and white
-#define COLORGAP 1500
-#define SIDE_COLORGAP 1700
+#define STOP 1400
+
 
 //UPDATE TIME
-#define LINE_SENSOR_UPDATE 50
-#define KINE_UPDATE 50
+#define BUMP_SENSOR_UPDATE 50
+#define KINE_UPDATE 100
 
 Motors_c motors;
-LineSensor_c line_sensors;
-Kinematics_c kine;
+BumpSensor_c bump_sensors;
+Kinematics_c kinematics;
 
-bool on_line;                           // on line or not
+bool on_following;                           // on line or not
 unsigned long line_sensor_ts, kine_ts;  // time stamp
-float sens_val[5];                      // line sensors values
+float sens_val[2];                      // line sensors values
 int eeprom_address;
 
 //weighted leader
@@ -34,19 +33,13 @@ void weighted(float left, float right) {
   //h_m = N[1]-N[0];
   float w = N[1] - N[0];
   //Serial.println(w);
-  motors.setMotorPower(0.30 + 0.11 * w, 0.30 - 0.11 * w);
+  motors.setMotorPower(19 + 10* w, 19 + 10 * w);
 }
 
 bool lineDetected() {
-  for (int i = 0; i < 3; i++) {
-    if (sens_val[i] > COLORGAP) {
-      return true;
-    }
-  }
-  for (int i = 3; i < 5; i++) {
-    if (sens_val[i] > SIDE_COLORGAP) {  // 1000
-      return true;
-    }
+  for (int i = 0; i < 2; i++) {
+    if (sens_val[i] > STOP)
+    return true;
   }
   return false;
 }
@@ -55,18 +48,21 @@ bool lineDetected() {
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  delay(5000);
+  //delay(5000);
   Serial.println("***RESET***");
   // put your setup code here, to run once:
   line_sensor_ts = millis();
   kine_ts = millis();
 
-  on_line = false;
+  on_following = true;
   eeprom_address = 0;
   for (int i = 0; i < EEPROM.length(); i++) {
     EEPROM.write(i, 0);
   }
   Serial.println("EEPROM cleared!");
+
+  setupEncoder0();
+  setupEncoder1();
 }
 
 void loop() {
@@ -84,29 +80,34 @@ void loop() {
 
   elapsed_t = current_ts - line_sensor_ts;
 
-  if (elapsed_t > LINE_SENSOR_UPDATE) {
-    line_sensors.readLineSensor(5, sens_val);
-    on_line = lineDetected();
+  if (elapsed_t > BUMP_SENSOR_UPDATE) {
+    bump_sensors.readBumpSensor(2, sens_val);
+    on_following = lineDetected();
     line_sensor_ts = millis();
   }
 
   elapsed_t = current_ts - kine_ts;
   //Update Kine
   if (elapsed_t > KINE_UPDATE) {
-    kine.Update(count_e1, count_e0);
-    EEPROM.put( eeprom_address, kine.getTheta());
+    kinematics.update();
+    EEPROM.put( eeprom_address, float(kinematics.getTheta()));
     eeprom_address += sizeof(float);
-    EEPROM.put( eeprom_address, kine.getX());
+    EEPROM.put( eeprom_address, float(kinematics.getX()));
     eeprom_address += sizeof(float);
-    EEPROM.put( eeprom_address, kine.getY());
-    eeprom_address += sizeof(float);
+    EEPROM.put( eeprom_address, float(kinematics.getY()));
+    eeprom_address += sizeof(float);  
     kine_ts = millis();
   }
 
-  if (on_line == true) {
-    weighted(sens_val[0], sens_val[2]);
+  if (on_following == true) {
+    weighted(sens_val[0], sens_val[1]);
   } else {
     motors.setMotorPower(0.00, 0.00);
   }
+
+  Serial.print("Left:");
+  Serial.println(sens_val[0]);
+  Serial.print("Right:");
+  Serial.println(sens_val[1]);  
 
 }

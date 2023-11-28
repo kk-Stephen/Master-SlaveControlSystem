@@ -2,6 +2,7 @@
 #include "bumpsensor.h"
 #include "encoders.h"
 #include "kinematics.h"
+# include <EEPROM.h>
 
 //detect black and white
 #define STOP 1400
@@ -9,7 +10,7 @@
 
 //UPDATE TIME
 #define BUMP_SENSOR_UPDATE 50
-#define KINE_UPDATE 50
+#define KINE_UPDATE 100
 
 Motors_c motors;
 BumpSensor_c bump_sensors;
@@ -32,7 +33,7 @@ void weighted(float left, float right) {
   //h_m = N[1]-N[0];
   float w = N[1] - N[0];
   //Serial.println(w);
-  motors.setMotorPower(0.30 - 0.15 * w, 0.30 + 0.15 * w);
+  motors.setMotorPower(0.35 - 0.15 * w, 0.35 + 0.15 * w);
 }
 
 bool lineDetected() {
@@ -55,6 +56,13 @@ void setup() {
 
   on_following = true;
   eeprom_address = 0;
+  for (int i = 0; i < EEPROM.length(); i++) {
+    EEPROM.write(i, 0);
+  }
+  Serial.println("EEPROM cleared!");
+
+  setupEncoder0();
+  setupEncoder1();
 }
 
 void loop() {
@@ -82,12 +90,12 @@ void loop() {
   //Update Kine
   if (elapsed_t > KINE_UPDATE) {
     kinematics.update();
-    EEPROM.put( eeprom_address, kine.getTheta());
+    EEPROM.put( eeprom_address, float(kinematics.getTheta()));
     eeprom_address += sizeof(float);
-    EEPROM.put( eeprom_address, kine.getX());
+    EEPROM.put( eeprom_address, float(kinematics.getX()));
     eeprom_address += sizeof(float);
-    EEPROM.put( eeprom_address, kine.getY());
-    eeprom_address += sizeof(float);
+    EEPROM.put( eeprom_address, float(kinematics.getY()));
+    eeprom_address += sizeof(float);  
     kine_ts = millis();
   }
 

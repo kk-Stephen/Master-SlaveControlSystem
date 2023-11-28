@@ -53,7 +53,8 @@ class Motors_c {
         digitalWrite(R_DIR_PIN, FWD);
       }
       //judge the speed of left wheel
-      left_pwm = abs(left) / 0.74  * 49;
+      //left_pwm = abs(left) / 0.74  * 49;
+      left_pwm = abs(left);
       if (left_pwm < 12){
         left_pwm = 0;
       }
@@ -61,7 +62,7 @@ class Motors_c {
         left_pwm = 30;
       }
       //judge the speed of right wheel
-      right_pwm = abs(right) / 0.74  * 49;
+      right_pwm = abs(right);
       if (right_pwm < 14){
         right_pwm = 0;
       }
