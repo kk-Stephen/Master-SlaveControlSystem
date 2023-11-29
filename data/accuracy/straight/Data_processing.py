@@ -29,25 +29,28 @@ for file in os.listdir(dir_path):
                 end = (i + 1) * k
                 # Slice the dataframe by the index
                 sub_df = df.iloc[start:end]
+                max_val = sub_df['x'].max()
+                gap = max_val - 190.0
+                sub_df['x'] = sub_df['x'] - gap
+                sub_df = sub_df[sub_df['x'] >= 0.00]
                 # Print the sub dataframe
                 #print(f"Sub dataframe {i+1}:")
                 #print(sub_df)
-                #file_name = os.path.normpath(os.path.join(os.path.join(dir_path, file), "/" + data_file + str(i) + ".csv"))
                 file_name = os.path.normpath(os.path.join(os.path.join(dir_path, file)) + "/" + data_file + str(i) + ".csv")
                 print(file_name)
                 sub_df.to_csv(file_name, encoding='utf-8')
                 sub_ds.append(sub_df)
 
-            avg_df = sub_df
-            for r in range(k):
-                for c in range(3):
-                    value = 0
-                    for i in range(5):
-                        value = value + sub_ds[i].iloc[r, c]
-                    avg_df.iat[r, c] = value / 5
-
-            file_name = os.path.normpath(os.path.join(os.path.join(dir_path, file)) + "/" + data_file + "_average.csv")
-            avg_df.to_csv(file_name, encoding='utf-8')
+            # avg_df = sub_df
+            # for r in range(k):
+            #     for c in range(3):
+            #         value = 0
+            #         for i in range(5):
+            #             value = value + sub_ds[i].iloc[r, c]
+            #         avg_df.iat[r, c] = value / 5
+            #
+            # file_name = os.path.normpath(os.path.join(os.path.join(dir_path, file)) + "/" + data_file + "_average.csv")
+            # avg_df.to_csv(file_name, encoding='utf-8')
             # print("avg_df-sub_df")
             # print(avg_df)
 
