@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import csv
 
-dir_path = "D:/Github/Master-SlaveControlSystem/data/accuracy/straight"
+dir_path = "D:/Github/Master-SlaveControlSystem/data/accuracy/curve"
 # open the original csv file
 folders = [f for f in os.listdir(dir_path) if os.path.isdir(os.path.normpath(os.path.join(dir_path, f)))]
 for file in os.listdir(dir_path):
