@@ -4,6 +4,10 @@
 #include "kinematics.h"
 # include <EEPROM.h>
 
+//DEFINE A UPPER BOUND AND A LOWER BOUND
+//(Smaller value of bumper - 2000)/(4000 - 2000)
+
+
 //detect black and white
 #define STOP 1400
 
@@ -33,7 +37,14 @@ void weighted(float left, float right) {
   //h_m = N[1]-N[0];
   float w = N[1] - N[0];
   //Serial.println(w);
-  motors.setMotorPower(20 - 6* w, 20 + 6 * w);
+  float small = 0;
+  if (left > right){
+    small = right;
+  }else{
+    small = left;
+  }
+  float f = (small - 1000) / 2500;
+  motors.setMotorPower(25 * f - 8 * w, 25 * f + 8 * w);
 }
 
 bool lineDetected() {

@@ -19,7 +19,7 @@ for file in os.listdir(dir_path):
                     if "***********" not in line:
                         # Write the line to the output file
                         output.write(line)
-            df = pd.read_csv(os.path.normpath(os.path.join(os.path.join(dir_path, file), data_file)), header=None, names = ["theta", "x", "y"])
+            df = pd.read_csv(os.path.normpath(os.path.join(os.path.join(dir_path, file), data_file)), header=None, names=["theta", "x", "y"])
             n = len(df)
             k = n // 5
             sub_ds = []
@@ -30,8 +30,12 @@ for file in os.listdir(dir_path):
                 # Slice the dataframe by the index
                 sub_df = df.iloc[start:end]
                 # Print the sub dataframe
-                print(f"Sub dataframe {i+1}:")
-                print(sub_df)
+                #print(f"Sub dataframe {i+1}:")
+                #print(sub_df)
+                #file_name = os.path.normpath(os.path.join(os.path.join(dir_path, file), "/" + data_file + str(i) + ".csv"))
+                file_name = os.path.normpath(os.path.join(os.path.join(dir_path, file)) + "/" + data_file + str(i) + ".csv")
+                print(file_name)
+                sub_df.to_csv(file_name, encoding='utf-8')
                 sub_ds.append(sub_df)
 
             avg_df = sub_df
@@ -42,8 +46,10 @@ for file in os.listdir(dir_path):
                         value = value + sub_ds[i].iloc[r, c]
                     avg_df.iat[r, c] = value / 5
 
-            print("avg_df-sub_df")
-            print(avg_df)
+            file_name = os.path.normpath(os.path.join(os.path.join(dir_path, file)) + "/" + data_file + "_average.csv")
+            avg_df.to_csv(file_name, encoding='utf-8')
+            # print("avg_df-sub_df")
+            # print(avg_df)
 
 
 
