@@ -35,7 +35,7 @@ for file in os.listdir(dir_path):
                 sub_df['x'] = sub_df['x'] - gap
                 sub_df = sub_df[sub_df['x'] >= 0.00]
                 max_y = sub_df.loc[max_val_index, 'y']
-                gap = max_y - 190.0
+                gap = max_y + 190.0
                 sub_df['y'] = sub_df['y'] - gap
                 #Print the sub dataframe
                 #print(f"Sub dataframe {i+1}:")
