@@ -44,7 +44,7 @@ void weighted(float left, float right) {
     small = left;
   }
   float f = (small - 1000) / 2500;
-  motors.setMotorPower(25 * f - 8 * w, 25 * f + 8 * w);
+  motors.setMotorPower(25 * f - 15 * w, 25 * f + 15 * w);
 }
 
 bool lineDetected() {
@@ -78,12 +78,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if ( eeprom_address >= 1020) {
-    while (1) {
-      motors.setMotorPower(0.0, 0.0);
-      //      Serial.println(eeprom_address);
-    }
-  }
+  // if ( eeprom_address >= 1020) {
+  //   while (1) {
+  //     motors.setMotorPower(0.0, 0.0);
+  //     //      Serial.println(eeprom_address);
+  //   }
+  // }
 
   float elapsed_t;
   unsigned long current_ts;
