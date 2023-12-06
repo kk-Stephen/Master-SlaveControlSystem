@@ -73,13 +73,13 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  // if ( eeprom_address >= 1020) {
-  //   while (1) {
-  //     motors.setMotorPower(0.0, 0.0);
-  //     //      Serial.println(eeprom_address);
-  //   }
-  // }
+  //put your main code here, to run repeatedly:
+  if ( eeprom_address >= 1020) {
+    while (1) {
+      motors.setMotorPower(0.0, 0.0);
+      //      Serial.println(eeprom_address);
+    }
+  }
 
   float elapsed_t;
   unsigned long current_ts;
